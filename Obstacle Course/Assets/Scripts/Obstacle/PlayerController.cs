@@ -4,12 +4,20 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public Vector2 turn;
+    public float sensitivity = .5f;
+    public Vector3 deltaMove;
+    public float speed = 1;
+    public GameObject mover;
+    //part of input rotation ^
+
+
     [SerializeField] private float _moveSpeed = 10;
 
     // Start is called before the first frame update
     void Start()
     {
-       
+       Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -17,6 +25,11 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Movement();
+
+        turn.x += Input.GetAxis("Mouse X") * sensitivity;
+        turn.y += Input.GetAxis("Mouse Y") * sensitivity;
+        mover.transform.localRotation = Quaternion.Euler(-turn.y, turn.x, 0);
+        //transform.localRotation = Quaternion.Euler(-turn.y, 0, 0);
     }
 
     void Movement()
