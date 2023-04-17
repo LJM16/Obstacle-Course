@@ -2,24 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public Rigidbody projectile;
-public float speed = 20;
-
 
 public class GunScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public float Speed = 20f;
+    public float TimeTraveled = 5f;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetButtonDown("Fire1"))
-        {
-            Rigidbody instantiateProjectile = Instantiate(instantiate,transform.position,transform.rotation) as Rigidbody;
-        }
-    }
+
+	void Update () 
+	{
+		transform.Translate(Vector3.forward * Speed * Time.deltaTime);
+        Destroy(gameObject, TimeTraveled);
+	}
+
 }

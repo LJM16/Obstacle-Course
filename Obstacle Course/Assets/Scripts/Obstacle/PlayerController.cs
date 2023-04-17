@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Vector2 turn;
+    public GameObject SpawnPos;
+    public GameObject Bullet;
     public float sensitivity = .5f;
     public Vector3 deltaMove;
     public float speed = 1;
@@ -30,6 +32,13 @@ public class PlayerController : MonoBehaviour
         turn.y += Input.GetAxis("Mouse Y") * sensitivity;
         mover.transform.localRotation = Quaternion.Euler(-turn.y, turn.x, 0);
         //transform.localRotation = Quaternion.Euler(-turn.y, 0, 0);
+
+        if(Input.GetMouseButtonDown(0))
+        {
+            Instantiate(Bullet, SpawnPos.transform.position, SpawnPos.transform.rotation);
+        }
+
+
     }
 
     void Movement()
@@ -39,4 +48,6 @@ public class PlayerController : MonoBehaviour
 
         transform.Translate(xValue, 0f, zValue);
     }
+
+
 }
